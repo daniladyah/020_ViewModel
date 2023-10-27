@@ -60,6 +60,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
 @Composable
 fun TextHasil(jenisnya: String,status: String, alamat: String, email: String ){
     ElevatedCard(
@@ -119,7 +121,9 @@ fun TampilLayout(modifier: Modifier = Modifier) {
 fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
     var textNama by remember{mutableStateOf("")}
     var textTlp by remember{mutableStateOf("")}
-    var textEmail by remember{ mutableStateOf("") }
+    var textEmail by remember{ mutableStateOf("")}
+    var textAlamat by remember {
+        mutableStateOf("")}
 
     val context = LocalContext.current
     val dataForm: DataForm
@@ -155,6 +159,15 @@ fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
             textEmail = it
         }
     )
+    OutlinedTextField(
+        value = textAlamat, singleLine = true,
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text(text = "Alamat")},
+        onValueChange = {
+            textAlamat = it
+        }
+    )
     SelectJK(
         options = jenis.map { id -> context.resources.getString(id) },
         onSelectionChanged = {cobaViewModel.setJenisK(it)}
@@ -162,7 +175,7 @@ fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            cobaViewModel.insertData(textNama, textTlp, textEmail, dataForm.sex)
+            cobaViewModel.insertData(textNama, textTlp, textEmail, textAlamat, dataForm.sex)
         }
     ) {
         Text(text = stringResource(R.string.submit),

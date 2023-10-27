@@ -23,7 +23,7 @@ class CobaViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(DataForm())
     val uiState: StateFlow<DataForm> = _uiState.asStateFlow()
 
-    fun insertData(jk: String, st: String, al:String, em:String){
+    fun insertData(jk: String, st: String, al:String, em:String, sex:String){
         jenisKl = jk;
         status = st;
         alamat = al;
