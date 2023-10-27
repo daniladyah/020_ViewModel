@@ -1,6 +1,7 @@
 package com.example.a020_viewmodel
 
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -113,6 +114,7 @@ fun TampilLayout(modifier: Modifier = Modifier) {
 fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
     var textNama by remember{mutableStateOf("")}
     var textTlp by remember{mutableStateOf("")}
+    var textEmail by remember{ mutableStateOf("") }
 
     val context = LocalContext.current
     val dataForm: DataForm
@@ -137,6 +139,15 @@ fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
         label = { Text(text = "Telepon")},
         onValueChange = {
             textTlp = it
+        }
+    )
+    OutlinedTextField(
+        value = textEmail, singleLine = true,
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.fillMaxWidth(),
+        label = { Text(text = "Email")},
+        onValueChange = {
+            textEmail = it
         }
     )
     SelectJK(
