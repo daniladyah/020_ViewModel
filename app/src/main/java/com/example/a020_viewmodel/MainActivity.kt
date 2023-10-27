@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
-fun TextHasil(namanya: String,telponnya: String, jenisnya: String) {
+fun TextHasil(jenisnya: String,status: String, alamat: String, email: String ){
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -69,18 +69,23 @@ fun TextHasil(namanya: String,telponnya: String, jenisnya: String) {
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Text(text = "Nama : " + namanya,
+        Text(text = "Jenis Kelamin : " + jenisnya,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 4.dp)
         )
         Text(
-            text = "Telepon : " + telponnya,
+            text = "Status : " + status,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp)
         )
-        Text(text = "Jenis Kelamin : " + jenisnya,
+        Text(text = "Alamat : " + alamat,
             modifier = Modifier
-                .padding(horizontal = 10.dp, vertical = 5.dp))
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+        )
+        Text(text = "Email: " + email,
+            modifier = Modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+        )
     }
 }
 
@@ -157,7 +162,7 @@ fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            cobaViewModel.insertData(textNama, textTlp, dataForm.sex)
+            cobaViewModel.insertData(textNama, textTlp, textEmail, dataForm.sex)
         }
     ) {
         Text(text = stringResource(R.string.submit),
@@ -165,7 +170,12 @@ fun TampilForm(cobaViewModel : CobaViewModel = viewModel()) {
         )
     }
     Spacer(modifier = Modifier.height(180.dp))
-    TextHasil(namanya = cobaViewModel.namaUsr, telponnya = cobaViewModel.noTlp, jenisnya = cobaViewModel.jenisKl)
+    TextHasil(
+        jenisnya = cobaViewModel.jenisKl,
+        status = cobaViewModel.status,
+        alamat = cobaViewModel.alamat,
+        email = cobaViewModel.email,
+    )
 
 }
 @Composable
